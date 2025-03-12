@@ -1,4 +1,4 @@
-"""Program to read list of numbers and find the median"""
+
 
 def find_median(numbers):
     numbers.sort()  
