@@ -1,6 +1,4 @@
-"""Write a Python program to find the value for sin(x) up to n terms using the
- series
-   sin(x)=1-x^3/3!+x^5/5!..... ( sin(x) = ((-1)^n/(2n+1)!)x^(2n+1) )"""
+
 
 
 import math
