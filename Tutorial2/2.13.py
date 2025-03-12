@@ -1,4 +1,3 @@
-""" Write a python function to find the area of a circle."""
 
 
 import math
