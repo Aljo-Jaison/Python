@@ -1,5 +1,4 @@
-""" Write a Python program to read list of positive integers and separate the prime
- and composite numbers """
+
 
 def is_prime(n):
     if n < 2:
