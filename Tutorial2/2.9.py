@@ -1,4 +1,4 @@
-#Write a Program to reverse the first and second half of a string separately
+
 
 s=input("Enter the string : ")
 
