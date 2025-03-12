@@ -1,4 +1,4 @@
-""" Remove duplicate elements from a list."""
+
 
 def remove_duplicates(lst):
     unique_list = []
