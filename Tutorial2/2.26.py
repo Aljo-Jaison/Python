@@ -1,5 +1,4 @@
-"""Consider a list consisting of integers, floating point numbers and strings.
- Separate them into different lists depending on the data"""
+
 
 def separate_data_types(lst):
     integers = [x for x in lst if isinstance(x, int) and not isinstance(x, bool)]
