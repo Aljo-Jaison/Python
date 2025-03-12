@@ -1,4 +1,4 @@
-#Write a Program to replace all occurrence of a substring with a new substring.
+
 
 
 s= input("Enter the string")
