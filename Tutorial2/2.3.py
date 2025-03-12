@@ -1,4 +1,4 @@
-#Write a python script for palindrome checking without reversing the string
+
 
 def is_palindrome(s):
     n=len(s)
