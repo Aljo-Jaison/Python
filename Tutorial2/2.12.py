@@ -1,4 +1,4 @@
-"""Write Python script for converting Binary number into decimal number."""
+
 
 
 binary = input("Enter a binary number: ")
