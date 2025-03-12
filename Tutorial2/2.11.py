@@ -1,4 +1,3 @@
-"""Write Python script for converting decimal number into Binary number."""
 
 
 
