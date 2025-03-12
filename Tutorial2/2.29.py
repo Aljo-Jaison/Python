@@ -1,4 +1,4 @@
-"""Write a program to do basic set operations"""
+
 
 def set_operations(set1, set2):
     union_set = set1 | set2
