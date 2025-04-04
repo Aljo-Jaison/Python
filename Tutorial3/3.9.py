@@ -1,62 +1,55 @@
-import tkinter as tk
-from tkinter import messagebox
-import random
+from breezypythongui import EasyFrame
+from tkinter import DISABLED, NORMAL
 
-def Guess_game():
-    global l, h, g, a
-    if l <= h:
-        g = (l + h) // 2
-        lbl_g.config(text=f"Is it {g}?")
-    else:
-        lbl_g.config(text="Restart game.")
+class ReverseGuessGame(EasyFrame):
+    def __init__(self):
+        EasyFrame.__init__(self, title="Guess the Number")
+        
+        self.lbl_g = self.addLabel(text="Think of a number 1–100.", row=0, column=0, columnspan=2)
+        self.btn_sm = self.addButton(text="Too Small", row=1, column=0, command=self.small)
+        self.btn_lg = self.addButton(text="Too Large", row=1, column=1, command=self.large)
+        self.btn_corr = self.addButton(text="Correct!", row=2, column=0, columnspan=2, command=self.correct)
+        self.addButton(text="New Game", row=3, column=0, columnspan=2, command=self.new_game)
 
-def small():
-    global l, a
-    l = g + 1
-    a += 1
-    Guess_game()
+        self.l, self.h, self.a = 1, 100, 0
+        self.g = 0
+        self.guess_game()
 
-def large():
-    global h, a
-    h = g - 1
-    a += 1
-    Guess_game()
+    def guess_game(self):
+        if self.l <= self.h:
+            self.g = (self.l + self.h) // 2
+            self.lbl_g["text"] = f"Is it {self.g}?"
+        else:
+            self.lbl_g["text"] = "Restart game."
 
-def Correct():
-    messagebox.showinfo("Done!", f"Guessed in {a} attempts!")
-    disable_btns()
+    def small(self):
+        self.l = self.g + 1
+        self.a += 1
+        self.guess_game()
 
-def disable_btns():
-    btn_sm.config(state=tk.DISABLED)
-    btn_lg.config(state=tk.DISABLED)
-    btn_corr.config(state=tk.DISABLED)
+    def large(self):
+        self.h = self.g - 1
+        self.a += 1
+        self.guess_game()
 
-def new_game():
-    global l, h, a
-    l, h = 1, 100
-    a = 0
-    enable_btns()
-    Guess_game()
+    def correct(self):
+        self.messageBox("Done!", f"Guessed in {self.a} attempts!")
+        self.disable_btns()
 
-def enable_btns():
-    btn_sm.config(state=tk.NORMAL)
-    btn_lg.config(state=tk.NORMAL)
-    btn_corr.config(state=tk.NORMAL)
+    def disable_btns(self):
+        self.btn_sm["state"] = DISABLED
+        self.btn_lg["state"] = DISABLED
+        self.btn_corr["state"] = DISABLED
 
-w = tk.Tk()
-w.title("Guess the Number")
+    def enable_btns(self):
+        self.btn_sm["state"] = NORMAL
+        self.btn_lg["state"] = NORMAL
+        self.btn_corr["state"] = NORMAL
 
-lbl_g = tk.Label(w, text="Think of a number 1-100.")
-lbl_g.grid(row=0, column=0, columnspan=2)
-btn_sm = tk.Button(w, text="Too Small", command=small)
-btn_sm.grid(row=1, column=0)
-btn_lg = tk.Button(w, text="Too Large", command=large)
-btn_lg.grid(row=1, column=1)
-btn_corr = tk.Button(w, text="Correct!", command=Correct)
-btn_corr.grid(row=2, column=0, columnspan=2)
-tk.Button(w, text="New Game", command=new_game).grid(row=3, column=0, columnspan=2)
+    def new_game(self):
+        self.l, self.h, self.a = 1, 100, 0
+        self.enable_btns()
+        self.guess_game()
 
-l, h, a = 1, 100, 0
-Guess_game()
-
-w.mainloop()
+if __name__ == "__main__":
+    ReverseGuessGame().mainloop()
