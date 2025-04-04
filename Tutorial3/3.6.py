@@ -1,19 +1,16 @@
-import tkinter as tk
+from breezypythongui import EasyFrame
 
-def Upper():
-    text = input_entry.get()
-    result_label.config(text=text.upper())
+class UpperCaseConverter(EasyFrame):
+    def __init__(self):
+        EasyFrame.__init__(self, title="Convert to UpperCase")
+        self.addLabel(text="Enter the Text to be converted:", row=0, column=0)
+        self.inputField = self.addTextField(text="", row=0, column=1, width=30)
+        self.addButton(text="Convert", row=1, column=0, columnspan=2, command=self.Upper)
+        self.resultLabel = self.addLabel(text="Result: ", row=2, column=0, columnspan=2)
 
-root = tk.Tk()
-root.title("Convert to UpperCase")
+    def Upper(self):
+        text = self.inputField.getText()
+        self.resultLabel["text"] = "Result: " + text.upper()
 
-
-tk.Label(root, text="Enter the Text to be converted:").grid(row=0, column=0, padx=10, pady=10)
-input_entry = tk.Entry(root, width=30)
-input_entry.grid(row=0, column=1, padx=10, pady=10)
-convert_btn = tk.Button(root, text="Convert", command=Upper)
-convert_btn.grid(row=1, column=0, columnspan=2, pady=10)
-result_label = tk.Label(root, text="Result: ", font=("Montserrat", 12, "bold"))
-result_label.grid(row=2, column=0, columnspan=2, pady=10)
-
-root.mainloop()
+if __name__ == "__main__":
+    UpperCaseConverter().mainloop()
