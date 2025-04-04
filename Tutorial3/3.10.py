@@ -1,44 +1,45 @@
-import tkinter as tk
-from tkinter import messagebox
+from breezypythongui import EasyFrame
 
-def Distance_Calculator():
-    try:
-        h = float(entry_height.get())
-        b = float(entry_bounce.get())
-        n = int(entry_bounces.get())
-        d = h
-        for _ in range(n):
-            h *= b
-            d += 2 * h
-        entry_distance.delete(0, tk.END)
-        entry_distance.insert(0, f"{d:.2f}")
-    except ValueError:
-        messagebox.showerror("Error", "Please enter valid num.")
+class BouncyBallCalculator(EasyFrame):
+    def __init__(self):
+        EasyFrame.__init__(self, title="Bouncy Ball Distance Calculator")
 
-window = tk.Tk()
-window.title("Bouncy Ball Distance Calculator")
+        # Input fields
+        self.addLabel(text="Initial Height:", row=0, column=0)
+        self.heightField = self.addFloatField(value=0.0, row=0, column=1, width=10)
 
-label_height = tk.Label(window, text="Initial Height:")
-label_height.grid(row=0, column=0)
-entry_height = tk.Entry(window)
-entry_height.grid(row=0, column=1)
+        self.addLabel(text="Bounciness Index:", row=1, column=0)
+        self.bounceField = self.addFloatField(value=0.0, row=1, column=1, width=10)
 
-label_bounce = tk.Label(window, text="Bounciness Index:")
-label_bounce.grid(row=1, column=0)
-entry_bounce = tk.Entry(window)
-entry_bounce.grid(row=1, column=1)
+        self.addLabel(text="Number of Bounces:", row=2, column=0)
+        self.bouncesField = self.addIntegerField(value=0, row=2, column=1, width=10)
 
-label_bounces = tk.Label(window, text="Number of Bounces:")
-label_bounces.grid(row=2, column=0)
-entry_bounces = tk.Entry(window)
-entry_bounces.grid(row=2, column=1)
+        self.addLabel(text="Total Distance:", row=3, column=0)
+        self.resultField = self.addFloatField(value=0.0, row=3, column=1, width=10, precision=2)
+        self.resultField["state"] = "readonly"
 
-label_distance = tk.Label(window, text="Total Distance:")
-label_distance.grid(row=3, column=0)
-entry_distance = tk.Entry(window)
-entry_distance.grid(row=3, column=1)
+        # Button
+        self.addButton(text="Compute Distance", row=4, column=0, columnspan=2, command=self.computeDistance)
 
-button_compute = tk.Button(window, text="Compute Distance", command=Distance_Calculator)
-button_compute.grid(row=4, column=0, columnspan=2)
+    def computeDistance(self):
+        try:
+            h = self.heightField.getNumber()
+            b = self.bounceField.getNumber()
+            n = self.bouncesField.getNumber()
 
-window.mainloop()
+            if h < 0 or b < 0 or b >= 1 or n < 0:
+                self.messageBox("Error", "Please enter valid positive values. Bounciness should be between 0 and 1.")
+                return
+
+            d = h
+            for _ in range(n):
+                h *= b
+                d += 2 * h
+
+            self.resultField.setNumber(d)
+        except:
+            self.messageBox("Error", "Please enter valid numeric inputs.")
+
+# Launch the GUI
+if __name__ == "__main__":
+    BouncyBallCalculator().mainloop()
