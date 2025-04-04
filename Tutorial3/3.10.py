@@ -4,7 +4,7 @@ class BouncyBallCalculator(EasyFrame):
     def __init__(self):
         EasyFrame.__init__(self, title="Bouncy Ball Distance Calculator")
 
-        # Input fields
+        
         self.addLabel(text="Initial Height:", row=0, column=0)
         self.heightField = self.addFloatField(value=0.0, row=0, column=1, width=10)
 
@@ -18,7 +18,7 @@ class BouncyBallCalculator(EasyFrame):
         self.resultField = self.addFloatField(value=0.0, row=3, column=1, width=10, precision=2)
         self.resultField["state"] = "readonly"
 
-        # Button
+        
         self.addButton(text="Compute Distance", row=4, column=0, columnspan=2, command=self.computeDistance)
 
     def computeDistance(self):
@@ -40,6 +40,6 @@ class BouncyBallCalculator(EasyFrame):
         except:
             self.messageBox("Error", "Please enter valid numeric inputs.")
 
-# Launch the GUI
+
 if __name__ == "__main__":
     BouncyBallCalculator().mainloop()
